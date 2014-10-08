@@ -1,8 +1,9 @@
-﻿using System.Web.Routing;
+﻿using System.Web;
+using System.Web.Routing;
 
 namespace AuthorizationCodeGrant
 {
-    public class Global : System.Web.HttpApplication
+    public class Global : HttpApplication
     {
         protected void Application_Start()
         {

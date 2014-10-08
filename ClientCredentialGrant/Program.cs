@@ -1,20 +1,16 @@
-﻿using Constants;
-using DotNetOpenAuth.OAuth2;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+using Constants;
+using DotNetOpenAuth.OAuth2;
 
 namespace ClientCredentialGrant
 {
-    class Program
+    internal class Program
     {
         private static WebServerClient _webServerClient;
         private static string _accessToken;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             InitializeWebServerClient();
 
@@ -40,7 +36,7 @@ namespace ClientCredentialGrant
 
         private static void RequestToken()
         {
-            var state = _webServerClient.GetClientAccessToken(new[] { "bio", "notes" });
+            IAuthorizationState state = _webServerClient.GetClientAccessToken(new[] {"bio", "notes"});
             _accessToken = state.AccessToken;
         }
 
@@ -48,7 +44,7 @@ namespace ClientCredentialGrant
         {
             var resourceServerUri = new Uri(Paths.ResourceServerBaseAddress);
             var client = new HttpClient(_webServerClient.CreateAuthorizingHandler(_accessToken));
-            var body = client.GetStringAsync(new Uri(resourceServerUri, Paths.MePath)).Result;
+            string body = client.GetStringAsync(new Uri(resourceServerUri, Paths.MePath)).Result;
             Console.WriteLine(body);
         }
     }

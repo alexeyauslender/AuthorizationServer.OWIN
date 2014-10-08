@@ -1,9 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
+using ResourceServer;
 
-[assembly: OwinStartup(typeof(ResourceServer.Startup))]
+[assembly: OwinStartup(typeof (Startup))]
 
 namespace ResourceServer
 {

@@ -1,8 +1,5 @@
-﻿using Owin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Microsoft.Owin.Security.OAuth;
+using Owin;
 
 namespace ResourceServer
 {
@@ -10,7 +7,7 @@ namespace ResourceServer
     {
         public void ConfigureAuth(IAppBuilder app)
         {
-            app.UseOAuthBearerAuthentication(new Microsoft.Owin.Security.OAuth.OAuthBearerAuthenticationOptions());
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
     }
 }

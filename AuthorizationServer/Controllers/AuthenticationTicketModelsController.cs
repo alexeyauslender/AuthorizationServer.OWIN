@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -16,7 +13,7 @@ namespace AuthorizationServer.Controllers
 {
     public class AuthenticationTicketModelsController : ApiController
     {
-        private AuthenticationModelContext db = new AuthenticationModelContext();
+        private readonly AuthenticationModelContext db = new AuthenticationModelContext();
 
         // GET: api/AuthenticationTicketModels
         public IQueryable<AuthenticationTicketModel> GetAuthenticationTicketModels()
@@ -25,7 +22,7 @@ namespace AuthorizationServer.Controllers
         }
 
         // GET: api/AuthenticationTicketModels/5
-        [ResponseType(typeof(AuthenticationTicketModel))]
+        [ResponseType(typeof (AuthenticationTicketModel))]
         public async Task<IHttpActionResult> GetAuthenticationTicketModel(Guid id)
         {
             AuthenticationTicketModel authenticationTicketModel = await db.AuthenticationTicketModels.FindAsync(id);
@@ -38,8 +35,9 @@ namespace AuthorizationServer.Controllers
         }
 
         // PUT: api/AuthenticationTicketModels/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutAuthenticationTicketModel(Guid id, AuthenticationTicketModel authenticationTicketModel)
+        [ResponseType(typeof (void))]
+        public async Task<IHttpActionResult> PutAuthenticationTicketModel(Guid id,
+            AuthenticationTicketModel authenticationTicketModel)
         {
             if (!ModelState.IsValid)
             {
@@ -63,18 +61,16 @@ namespace AuthorizationServer.Controllers
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/AuthenticationTicketModels
-        [ResponseType(typeof(AuthenticationTicketModel))]
-        public async Task<IHttpActionResult> PostAuthenticationTicketModel(AuthenticationTicketModel authenticationTicketModel)
+        [ResponseType(typeof (AuthenticationTicketModel))]
+        public async Task<IHttpActionResult> PostAuthenticationTicketModel(
+            AuthenticationTicketModel authenticationTicketModel)
         {
             if (!ModelState.IsValid)
             {
@@ -93,17 +89,15 @@ namespace AuthorizationServer.Controllers
                 {
                     return Conflict();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = authenticationTicketModel.ContextToken }, authenticationTicketModel);
+            return CreatedAtRoute("DefaultApi", new {id = authenticationTicketModel.ContextToken},
+                authenticationTicketModel);
         }
 
         // DELETE: api/AuthenticationTicketModels/5
-        [ResponseType(typeof(AuthenticationTicketModel))]
+        [ResponseType(typeof (AuthenticationTicketModel))]
         public async Task<IHttpActionResult> DeleteAuthenticationTicketModel(Guid id)
         {
             AuthenticationTicketModel authenticationTicketModel = await db.AuthenticationTicketModels.FindAsync(id);

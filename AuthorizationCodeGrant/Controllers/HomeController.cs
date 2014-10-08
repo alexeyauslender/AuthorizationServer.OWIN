@@ -1,8 +1,9 @@
-﻿using Constants;
-using DotNetOpenAuth.OAuth2;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Web.Mvc;
+using Constants;
+using DotNetOpenAuth.Messaging;
+using DotNetOpenAuth.OAuth2;
 
 namespace AuthorizationCodeGrant.Controllers
 {
@@ -18,10 +19,10 @@ namespace AuthorizationCodeGrant.Controllers
             ViewBag.ApiResponse = "";
 
             InitializeWebServerClient();
-            var accessToken = Request.Form["AccessToken"];
+            string accessToken = Request.Form["AccessToken"];
             if (string.IsNullOrEmpty(accessToken))
             {
-                var authorizationState = _webServerClient.ProcessUserAuthorization(Request);
+                IAuthorizationState authorizationState = _webServerClient.ProcessUserAuthorization(Request);
                 if (authorizationState != null)
                 {
                     ViewBag.AccessToken = authorizationState.AccessToken;
@@ -32,7 +33,8 @@ namespace AuthorizationCodeGrant.Controllers
 
             if (!string.IsNullOrEmpty(Request.Form.Get("submit.Authorize")))
             {
-                var userAuthorization = _webServerClient.PrepareRequestUserAuthorization(new[] { "bio", "notes" });
+                OutgoingWebResponse userAuthorization =
+                    _webServerClient.PrepareRequestUserAuthorization(new[] {"bio", "notes"});
                 userAuthorization.Send(HttpContext);
                 Response.End();
             }
@@ -53,7 +55,7 @@ namespace AuthorizationCodeGrant.Controllers
             {
                 var resourceServerUri = new Uri(Paths.ResourceServerBaseAddress);
                 var client = new HttpClient(_webServerClient.CreateAuthorizingHandler(accessToken));
-                var body = client.GetStringAsync(new Uri(resourceServerUri, Paths.MePath)).Result;
+                string body = client.GetStringAsync(new Uri(resourceServerUri, Paths.MePath)).Result;
                 ViewBag.ApiResponse = body;
             }
 

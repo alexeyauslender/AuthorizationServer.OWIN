@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Owin.Security;
 
 namespace AuthorizationServer.Controllers
 {
@@ -16,23 +14,24 @@ namespace AuthorizationServer.Controllers
                 return View("AuthorizeError");
             }
 
-            var authentication = HttpContext.GetOwinContext().Authentication;
-            var ticket = authentication.AuthenticateAsync("Application").Result;
-            var identity = ticket != null ? ticket.Identity : null;
+            IAuthenticationManager authentication = HttpContext.GetOwinContext().Authentication;
+            AuthenticateResult ticket = authentication.AuthenticateAsync("Application").Result;
+            ClaimsIdentity identity = ticket != null ? ticket.Identity : null;
             if (identity == null)
             {
                 authentication.Challenge("Application");
                 return new HttpUnauthorizedResult();
             }
 
-            var scopes = (Request.QueryString.Get("scope") ?? "").Split(' ');
+            string[] scopes = (Request.QueryString.Get("scope") ?? "").Split(' ');
 
             if (Request.HttpMethod == "POST")
             {
                 if (!string.IsNullOrEmpty(Request.Form.Get("submit.Grant")))
                 {
-                    identity = new ClaimsIdentity(identity.Claims, "Bearer", identity.NameClaimType, identity.RoleClaimType);
-                    foreach (var scope in scopes)
+                    identity = new ClaimsIdentity(identity.Claims, "Bearer", identity.NameClaimType,
+                        identity.RoleClaimType);
+                    foreach (string scope in scopes)
                     {
                         identity.AddClaim(new Claim("urn:oauth:scope", scope));
                     }
