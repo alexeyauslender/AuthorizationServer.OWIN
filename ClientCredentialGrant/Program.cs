@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Security.Claims;
 using Constants;
 using DotNetOpenAuth.OAuth2;
 
@@ -36,7 +37,7 @@ namespace ClientCredentialGrant
 
         private static void RequestToken()
         {
-            IAuthorizationState state = _webServerClient.GetClientAccessToken(new[] {"bio", "notes"});
+            IAuthorizationState state = _webServerClient.GetClientAccessToken(new[] { ClaimTypes.SerialNumber, "11111111", ClaimTypes.Country, "Israel" });
             _accessToken = state.AccessToken;
         }
 

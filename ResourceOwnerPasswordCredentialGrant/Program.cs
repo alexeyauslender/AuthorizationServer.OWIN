@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Security.Claims;
 using Constants;
 using DotNetOpenAuth.OAuth2;
 
@@ -37,7 +38,7 @@ namespace ResourceOwnerPasswordCredentialGrant
         private static void RequestToken()
         {
             IAuthorizationState state = _webServerClient.ExchangeUserCredentialForToken("Alexey Auslender", string.Empty,
-                new[] {"bio"});
+                new[] { ClaimTypes.SerialNumber, "11111111", ClaimTypes.Country, "Israel" });
             _accessToken = state.AccessToken;
         }
 

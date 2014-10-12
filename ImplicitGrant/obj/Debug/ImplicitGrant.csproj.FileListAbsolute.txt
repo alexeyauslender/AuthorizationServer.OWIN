@@ -40,24 +40,3 @@ C:\Users\alexey\Desktop\OWIN OAuth 2.0 Authorization Server\C#\ImplicitGrant\bin
 C:\Users\alexey\Desktop\OWIN OAuth 2.0 Authorization Server\C#\ImplicitGrant\obj\Debug\ImplicitGrant.csprojResolveAssemblyReference.cache
 C:\Users\alexey\Desktop\OWIN OAuth 2.0 Authorization Server\C#\ImplicitGrant\obj\Debug\ImplicitGrant.dll
 C:\Users\alexey\Desktop\OWIN OAuth 2.0 Authorization Server\C#\ImplicitGrant\obj\Debug\ImplicitGrant.pdb
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\ImplicitGrant.dll.config
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\ImplicitGrant.dll
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\ImplicitGrant.pdb
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\Constants.dll
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\System.Web.Helpers.dll
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\System.Web.Mvc.dll
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\System.Web.Razor.dll
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\System.Web.WebPages.Deployment.dll
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\System.Web.WebPages.dll
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\System.Web.WebPages.Razor.dll
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\Constants.pdb
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\System.Web.Helpers.xml
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\System.Web.Mvc.xml
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\System.Web.Razor.xml
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\System.Web.WebPages.xml
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\System.Web.WebPages.Deployment.xml
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\bin\System.Web.WebPages.Razor.xml
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\obj\Debug\ImplicitGrant.csprojResolveAssemblyReference.cache
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\obj\Debug\ImplicitGrant.dll
-C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\ImplicitGrant\obj\Debug\ImplicitGrant.pdb

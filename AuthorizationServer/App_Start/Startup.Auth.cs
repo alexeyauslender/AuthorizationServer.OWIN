@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Globalization;
-using System.Linq;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
@@ -83,7 +82,7 @@ namespace AuthorizationServer
                 int clientId;
                 if (Int32.TryParse(context.ClientId, out clientId))
                 {
-                    var consumerModel = db.ConsumerModels.Find(clientId);
+                    ConsumerModel consumerModel = db.ConsumerModels.Find(clientId);
                     if (clientId == consumerModel.ConsumerId && consumerModel.RedirectUrl == context.RedirectUri)
                     {
                         context.Validated();
@@ -105,7 +104,7 @@ namespace AuthorizationServer
                     int clientId;
                     if (Int32.TryParse(context.ClientId, out clientId))
                     {
-                        var consumerModel = db.ConsumerModels.Find(clientId);
+                        ConsumerModel consumerModel = db.ConsumerModels.Find(clientId);
                         if (clientId == consumerModel.ConsumerId &&
                             clientSecret == consumerModel.ConsumerSecret)
                         {
@@ -119,8 +118,26 @@ namespace AuthorizationServer
 
         private Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var identity = new ClaimsIdentity(new GenericIdentity(context.UserName, OAuthDefaults.AuthenticationType),
-                context.Scope.Select(x => new Claim("urn:oauth:scope", x)));
+            var claims = new List<Claim>();
+            try
+            {
+                for (int i = 0; i < context.Scope.Count; i++)
+                {
+                    string type = context.Scope[i];
+                    string value = context.Scope[++i];
+                    var claim = new Claim(type, value);
+                    claims.Add(claim);
+                }
+            }
+            catch (Exception ex)
+            {
+                //:TODO
+                //Log.Error(ErrorMessage, ex);
+                throw;
+            }
+
+            var identity = new ClaimsIdentity(new GenericIdentity(
+                context.ClientId, OAuthDefaults.AuthenticationType), claims);
 
             context.Validated(identity);
 
@@ -129,8 +146,26 @@ namespace AuthorizationServer
 
         private Task GrantClientCredetails(OAuthGrantClientCredentialsContext context)
         {
-            var identity = new ClaimsIdentity(new GenericIdentity(context.ClientId, OAuthDefaults.AuthenticationType),
-                context.Scope.Select(x => new Claim("urn:oauth:scope", x)));
+            var claims = new List<Claim>();
+            try
+            {
+                for (int i = 0; i < context.Scope.Count; i++)
+                {
+                    string type = context.Scope[i];
+                    string value = context.Scope[++i];
+                    var claim = new Claim(type, value);
+                    claims.Add(claim);
+                }
+            }
+            catch (Exception ex)
+            {
+                //:TODO
+                //Log.Error(ErrorMessage, ex);
+                throw;
+            }
+
+            var identity = new ClaimsIdentity(new GenericIdentity(
+                context.ClientId, OAuthDefaults.AuthenticationType), claims);
 
             context.Validated(identity);
 

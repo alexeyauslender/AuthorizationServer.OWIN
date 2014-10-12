@@ -9,5 +9,6 @@ C:\Users\alexey\Desktop\OWIN OAuth 2.0 Authorization Server\C#\Constants\obj\Deb
 C:\Users\alexey\Desktop\OWIN OAuth 2.0 Authorization Server\C#\Constants\obj\Debug\Constants.pdb
 C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\Constants\bin\Debug\Constants.dll
 C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\Constants\bin\Debug\Constants.pdb
+C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\Constants\obj\Debug\Constants.csprojResolveAssemblyReference.cache
 C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\Constants\obj\Debug\Constants.dll
 C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\Constants\obj\Debug\Constants.pdb

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Mvc;
 using Constants;
 using DotNetOpenAuth.Messaging;
@@ -34,7 +35,7 @@ namespace AuthorizationCodeGrant.Controllers
             if (!string.IsNullOrEmpty(Request.Form.Get("submit.Authorize")))
             {
                 OutgoingWebResponse userAuthorization =
-                    _webServerClient.PrepareRequestUserAuthorization(new[] {"bio", "notes"});
+                    _webServerClient.PrepareRequestUserAuthorization(new[] { ClaimTypes.AuthorizationDecision, "Get_Access_to_device_and_app_history", ClaimTypes.Role, "END_USER" });
                 userAuthorization.Send(HttpContext);
                 Response.End();
             }
