@@ -163,3 +163,6 @@ C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\AuthorizationServer\bin\Syste
 C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\AuthorizationServer\obj\Debug\AuthorizationServer.csprojResolveAssemblyReference.cache
 C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\AuthorizationServer\obj\Debug\AuthorizationServer.dll
 C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\AuthorizationServer\obj\Debug\AuthorizationServer.pdb
+C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\AuthorizationServer\obj\Debug\AuthorizationServer.Migrations.InitialCreate.resources
+C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\AuthorizationServer\obj\Debug\AuthorizationServer.csproj.GenerateResource.Cache
+C:\Users\alexey\Documents\GitHub\AuthorizationOWIN\AuthorizationServer\obj\Debug\AuthorizationServer.Migrations.Addconsumermodel.resources

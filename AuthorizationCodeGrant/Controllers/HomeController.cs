@@ -70,7 +70,7 @@ namespace AuthorizationCodeGrant.Controllers
                 AuthorizationEndpoint = new Uri(authorizationServerUri, Paths.AuthorizePath),
                 TokenEndpoint = new Uri(authorizationServerUri, Paths.TokenPath)
             };
-            _webServerClient = new WebServerClient(authorizationServer, Clients.Client1.Id, Clients.Client1.Secret);
+            _webServerClient = new WebServerClient(authorizationServer, "1", "alexus-secret");
         }
     }
 }

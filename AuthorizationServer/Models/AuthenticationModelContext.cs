@@ -17,5 +17,7 @@ namespace AuthorizationServer.Models
         }
 
         public DbSet<AuthenticationTicketModel> AuthenticationTicketModels { get; set; }
+
+        public DbSet<ConsumerModel> ConsumerModels { get; set; }
     }
 }

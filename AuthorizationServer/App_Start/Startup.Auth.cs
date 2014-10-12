@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
@@ -77,31 +78,40 @@ namespace AuthorizationServer
 
         private Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
         {
-            if (context.ClientId == Clients.Client1.Id)
+            using (var db = new AuthenticationModelContext())
             {
-                context.Validated(Clients.Client1.RedirectUrl);
-            }
-            else if (context.ClientId == Clients.Client2.Id)
-            {
-                context.Validated(Clients.Client2.RedirectUrl);
+                int clientId;
+                if (Int32.TryParse(context.ClientId, out clientId))
+                {
+                    var consumerModel = db.ConsumerModels.Find(clientId);
+                    if (clientId == consumerModel.ConsumerId && consumerModel.RedirectUrl == context.RedirectUri)
+                    {
+                        context.Validated();
+                    }
+                }
             }
             return Task.FromResult(0);
         }
 
         private Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-            string clientId;
+            string clientIdStr;
             string clientSecret;
-            if (context.TryGetBasicCredentials(out clientId, out clientSecret) ||
-                context.TryGetFormCredentials(out clientId, out clientSecret))
+            if (context.TryGetBasicCredentials(out clientIdStr, out clientSecret) ||
+                context.TryGetFormCredentials(out clientIdStr, out clientSecret))
             {
-                if (clientId == Clients.Client1.Id && clientSecret == Clients.Client1.Secret)
+                using (var db = new AuthenticationModelContext())
                 {
-                    context.Validated();
-                }
-                else if (clientId == Clients.Client2.Id && clientSecret == Clients.Client2.Secret)
-                {
-                    context.Validated();
+                    int clientId;
+                    if (Int32.TryParse(context.ClientId, out clientId))
+                    {
+                        var consumerModel = db.ConsumerModels.Find(clientId);
+                        if (clientId == consumerModel.ConsumerId &&
+                            clientSecret == consumerModel.ConsumerSecret)
+                        {
+                            context.Validated();
+                        }
+                    }
                 }
             }
             return Task.FromResult(0);
