@@ -24,4 +24,4 @@ Visual Studio 2013,Microsoft.Net 4.5,Microsoft SQL Server 2012,IIS express (come
 
 Download the zip file from github.Open AuthorizationServer.sln using Visual Studio 2013.Open Package Manager Console,Restore button will appear on right top corner.Restore missing packages by pressing Restore.Compile the project.Open solution properties 
 by pressing on Properties tab on AuthorizationServer solution context menu in Solution Explorer.Choose Multiple startup projects
-select Start entry in Action drop down list for ResourceServer,
+select Start entry in Action drop down list for ResourceServer,AuthorizationServer and one of desired grant types.Press F5 and enjoy by the power of OAuth 2.0.
