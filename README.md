@@ -14,7 +14,7 @@ resource owner password credentials, and client credentials.
 
 Project description
 ===================
-This project includes Authorization Server implementation using Microsoft Katana project.Implementation of four authorization grants of OAuth 2.0 also included in solution.
+This project includes Authorization Server implementation using Microsoft Katana project.Implementation of four authorization grants of OAuth 2.0 also included.
 
 
 Project setup
