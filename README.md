@@ -17,7 +17,7 @@ Project description
 This project includes Authorization Server implementation using Microsoft Katana project.Implementation of four authorization grants of OAuth 2.0 also included.
 
 
-Project setup
+Initial setup
 =============
 Prerequisites:
 Visual Studio 2013,Microsoft.Net 4.5,Microsoft SQL Server 2012,IIS express (comes with VS installation).
