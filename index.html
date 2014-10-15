@@ -27,37 +27,35 @@
         </ul>
       </header>
       <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h1>
+<a name="authorizationserverowin" class="anchor" href="#authorizationserverowin"><span class="octicon octicon-link"></span></a>AuthorizationServer.OWIN</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>Implementation of an OAuth2 authorization server using Katana project (OWIN specification).</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<p>Authorization server is the infrastructure for implementing application and API authorization.
+OAuth 2.0 focuses on client developer simplicity while providing specific authorization flows for web
+applications, desktop applications, mobile phones, and living room devices <a href="http://oauth.net/2/">http://oauth.net/2/</a>.
+Instead of using the credentials such as user name and password to access a protected resource,the client obtains an access token.
+To request an access token, the client obtains authorization from the resource owner.The authorization is expressed in the form of an
+authorization grant, which the client uses to request the access
+token.  OAuth defines four grant types: authorization code, implicit,
+resource owner password credentials, and client credentials.</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<h1>
+<a name="project-description" class="anchor" href="#project-description"><span class="octicon octicon-link"></span></a>Project description</h1>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<p>This project includes Authorization Server implementation using Microsoft Katana project.Implementation of four authorization grants of OAuth 2.0 also included.</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<h1>
+<a name="project-setup" class="anchor" href="#project-setup"><span class="octicon octicon-link"></span></a>Project setup</h1>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<p>Prerequisites:
+Visual Studio 2013,Microsoft.Net 4.5,Microsoft SQL Server 2012,IIS express (comes with VS installation).</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>Download the zip file from <a href="https://github.com/aus1977/Alexus.AuthorizationServer.OWIN/archive/Integration.zip">https://github.com/aus1977/Alexus.AuthorizationServer.OWIN/archive/Integration.zip</a>.
+Open AuthorizationServer.sln using Visual Studio 2013.Open Package Manager Console,"Restore" button will appear on right top corner.Restore missing packages by pressing Restore.Compile the project.Open solution properties 
+by pressing on Properties tab on AuthorizationServer solution context menu in Solution Explorer.Choose Multiple startup projects
+select Start entry in Action drop down list for ResourceServer,AuthorizationServer and one of desired grant types.Press F5 and enjoy the power of OAuth 2.0.</p>
       </section>
     </div>
     <footer>
