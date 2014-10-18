@@ -23,6 +23,6 @@ Prerequisites:
 Visual Studio 2013,Microsoft.Net 4.5,Microsoft SQL Server 2012,IIS express (comes with VS installation).
 
 Download the zip file from https://github.com/aus1977/Alexus.AuthorizationServer.OWIN/archive/Integration.zip.
-Open AuthorizationServer.sln using Visual Studio 2013.Open Package Manager Console,"Restore" button will appear on right top corner.Restore missing packages by pressing Restore.Compile the project.Open solution properties 
+Open AuthorizationServer.sln using Visual Studio 2012 or 2013.Open Package Manager Console,"Restore" button will appear on right top corner.Restore missing packages by pressing Restore.Compile the project.Open solution properties 
 by pressing on Properties tab on AuthorizationServer solution context menu in Solution Explorer.Choose Multiple startup projects
 select Start entry in Action drop down list for ResourceServer,AuthorizationServer and one of desired grant types.Press F5 and enjoy the power of OAuth 2.0.
