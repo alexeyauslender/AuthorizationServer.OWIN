@@ -23,20 +23,46 @@
         <script type="text/javascript">
             (function($) {
                 var authorizeUri = '@(Paths.AuthorizationServerBaseAddress + Paths.AuthorizePath)';
-                var tokenUri = '@(Paths.AuthorizationServerBaseAddress + Paths.TokenPath)';
                 var apiUri = '@(Paths.ResourceServerBaseAddress + Paths.MePath)';
                 var returnUri = '@Paths.ImplicitGrantCallBackPath';
 
                 $('#Authorize').click(function() {
                     var nonce = 'my-nonce';
+                    /*Building authorization request
+                    The client constructs the request URI by adding the following
+                    parameters to the query component of the authorization endpoint URI
+                    using the "application/x-www-form-urlencoded" format
+                    response_type
+                    =============
+                    REQUIRED.  Value MUST be set to "token".
+                    client_id
+                    =========
+                    REQUIRED.  The client identifier.
+                    redirect_uri
+                    ============
+                    OPTIONAL.
+                    scope
+                    =====
+                    OPTIONAL.  The scope of the access request
+                    The authorization server MAY fully or partially ignore the scope
+                    requested by the client, based on the authorization server policy or
+                    the resource owner's instructions.
+                    state
+                    =====
+                    RECOMMENDED.  An opaque value used by the client to maintain
+                    state between the request and callback.  The authorization
+                    server includes this value when redirecting the user-agent back
+                    to the client.  The parameter SHOULD be used for preventing
+                    cross-site request forgery
+                    */
+
 
                     var uri = addQueryString(authorizeUri, {
+                        'response_type': 'token',
                         'client_id': '2',
                         'redirect_uri': returnUri,
                         'state': nonce,
-                        'scope': 'SHOW_NOTES',
-                        'Country': 'Israel',
-                        'response_type': 'token',
+                        'scope': 'SHOW_NOTES SHOW_SOME_INFO'
                     });
 
                     window.oauth = {};
