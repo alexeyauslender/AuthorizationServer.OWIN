@@ -1,11 +1,9 @@
+using System.Data.Entity.Migrations;
+using AuthorizationServer.Models;
+
 namespace AuthorizationServer.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<AuthorizationServer.Models.AuthenticationModelContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<AuthenticationModelContext>
     {
         public Configuration()
         {
@@ -13,7 +11,7 @@ namespace AuthorizationServer.Migrations
             ContextKey = "AuthorizationServer.Models.AuthenticationModelContext";
         }
 
-        protected override void Seed(AuthorizationServer.Models.AuthenticationModelContext context)
+        protected override void Seed(AuthenticationModelContext context)
         {
             //  This method will be called after migrating to the latest version.
 
