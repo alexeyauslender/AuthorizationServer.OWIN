@@ -5,6 +5,7 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using Authorization.Models;
 using AuthorizationServer.Models;
+using AuthorizationServer.Providers;
 using Constants;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
@@ -19,6 +20,11 @@ namespace AuthorizationServer
     {
         public void ConfigureAuth(IAppBuilder app)
         {
+            // Configure the db context and user manager to use a single instance per request
+            app.CreatePerOwinContext(ApplicationDbContext.Create);
+            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+
+
             // Enable Application Sign In Cookie
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
@@ -51,13 +57,7 @@ namespace AuthorizationServer
                 AllowInsecureHttp = true,
 #endif
                 // Authorization server provider which controls the lifecycle of Authorization Server
-                Provider = new OAuthAuthorizationServerProvider
-                {
-                    OnValidateClientRedirectUri = ValidateClientRedirectUri,
-                    OnValidateClientAuthentication = ValidateClientAuthentication,
-                    OnGrantResourceOwnerCredentials = GrantResourceOwnerCredentials,
-                    OnGrantClientCredentials = GrantClientCredetails
-                },
+                Provider = new ApplicationOAuthProvider(),
 
                 // Authorization code provider which creates and receives authorization code
                 AuthorizationCodeProvider = new AuthenticationTokenProvider
@@ -75,103 +75,7 @@ namespace AuthorizationServer
             });
         }
 
-        private Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
-        {
-            using (var db = new AuthenticationModelContext())
-            {
-                int clientId;
-                if (Int32.TryParse(context.ClientId, out clientId))
-                {
-                    ConsumerModel consumerModel = db.ConsumerModels.Find(clientId);
-                    if (clientId == consumerModel.ConsumerId && consumerModel.RedirectUrl == context.RedirectUri)
-                    {
-                        context.Validated();
-                    }
-                }
-            }
-            return Task.FromResult(0);
-        }
-
-        private Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
-        {
-            string clientIdStr;
-            string clientSecret;
-            if (context.TryGetBasicCredentials(out clientIdStr, out clientSecret) ||
-                context.TryGetFormCredentials(out clientIdStr, out clientSecret))
-            {
-                using (var db = new AuthenticationModelContext())
-                {
-                    int clientId;
-                    if (Int32.TryParse(context.ClientId, out clientId))
-                    {
-                        ConsumerModel consumerModel = db.ConsumerModels.Find(clientId);
-                        if (clientId == consumerModel.ConsumerId &&
-                            clientSecret == consumerModel.ConsumerSecret)
-                        {
-                            context.Validated();
-                        }
-                    }
-                }
-            }
-            return Task.FromResult(0);
-        }
-
-        private Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
-        {
-            var claims = new List<Claim>();
-            try
-            {
-                for (int i = 0; i < context.Scope.Count; i++)
-                {
-                    string type = context.Scope[i];
-                    string value = context.Scope[++i];
-                    var claim = new Claim(type, value);
-                    claims.Add(claim);
-                }
-            }
-            catch (Exception ex)
-            {
-                //:TODO
-                //Log.Error(ErrorMessage, ex);
-                throw;
-            }
-
-            var identity = new ClaimsIdentity(new GenericIdentity(
-                context.ClientId, OAuthDefaults.AuthenticationType), claims);
-
-            context.Validated(identity);
-
-            return Task.FromResult(0);
-        }
-
-        private Task GrantClientCredetails(OAuthGrantClientCredentialsContext context)
-        {
-            var claims = new List<Claim>();
-            try
-            {
-                for (int i = 0; i < context.Scope.Count; i++)
-                {
-                    string type = context.Scope[i];
-                    string value = context.Scope[++i];
-                    var claim = new Claim(type, value);
-                    claims.Add(claim);
-                }
-            }
-            catch (Exception ex)
-            {
-                //:TODO
-                //Log.Error(ErrorMessage, ex);
-                throw;
-            }
-
-            var identity = new ClaimsIdentity(new GenericIdentity(
-                context.ClientId, OAuthDefaults.AuthenticationType), claims);
-
-            context.Validated(identity);
-
-            return Task.FromResult(0);
-        }
-
+       
 
         private void CreateAuthenticationCode(AuthenticationTokenCreateContext context)
         {

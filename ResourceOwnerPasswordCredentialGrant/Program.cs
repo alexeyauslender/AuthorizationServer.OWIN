@@ -32,13 +32,13 @@ namespace ResourceOwnerPasswordCredentialGrant
                 AuthorizationEndpoint = new Uri(authorizationServerUri, Paths.AuthorizePath),
                 TokenEndpoint = new Uri(authorizationServerUri, Paths.TokenPath)
             };
-            _webServerClient = new WebServerClient(authorizationServer, "1", "alexus-secret");
+            _webServerClient = new WebServerClient(authorizationServer);
         }
 
         private static void RequestToken()
         {
-            IAuthorizationState state = _webServerClient.ExchangeUserCredentialForToken("Alexey Auslender", string.Empty,
-                new[] { ClaimTypes.SerialNumber, "11111111", ClaimTypes.Country, "Israel" });
+            IAuthorizationState state = _webServerClient.ExchangeUserCredentialForToken("aus@mail.ru", "123456",
+                new[] { "SHOW_NOTES","SHOW_SOME_INFO" });
             _accessToken = state.AccessToken;
         }
 
@@ -46,7 +46,7 @@ namespace ResourceOwnerPasswordCredentialGrant
         {
             var resourceServerUri = new Uri(Paths.ResourceServerBaseAddress);
             var client = new HttpClient(_webServerClient.CreateAuthorizingHandler(_accessToken));
-            string body = client.GetStringAsync(new Uri(resourceServerUri, Paths.MePath)).Result;
+            string body = client.GetStringAsync(new Uri(resourceServerUri, Paths.IdentityPath)).Result;
             Console.WriteLine(body);
         }
     }

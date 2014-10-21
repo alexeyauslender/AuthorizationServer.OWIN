@@ -56,7 +56,7 @@ namespace AuthorizationCodeGrant.Controllers
             {
                 var resourceServerUri = new Uri(Paths.ResourceServerBaseAddress);
                 var client = new HttpClient(_webServerClient.CreateAuthorizingHandler(accessToken));
-                string body = client.GetStringAsync(new Uri(resourceServerUri, Paths.MePath)).Result;
+                string body = client.GetStringAsync(new Uri(resourceServerUri, Paths.IdentityPath)).Result;
                 ViewBag.ApiResponse = body;
             }
 

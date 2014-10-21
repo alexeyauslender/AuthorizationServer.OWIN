@@ -26,6 +26,6 @@
         public const string TokenPath = "/OAuth/Token";
         public const string LoginPath = "/Account/Login";
         public const string LogoutPath = "/Account/Logout";
-        public const string MePath = "/api/Identity";
+        public const string IdentityPath = "/api/Identity";
     }
 }

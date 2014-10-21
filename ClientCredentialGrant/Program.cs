@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using System.Security.Claims;
 using Constants;
 using DotNetOpenAuth.OAuth2;
 
@@ -37,7 +36,7 @@ namespace ClientCredentialGrant
 
         private static void RequestToken()
         {
-            IAuthorizationState state = _webServerClient.GetClientAccessToken(new[] { ClaimTypes.SerialNumber, "11111111", ClaimTypes.Country, "Israel" });
+            IAuthorizationState state = _webServerClient.GetClientAccessToken(new[] {"SHOW_NOTES", "SHOW_SOME_INFO"});
             _accessToken = state.AccessToken;
         }
 
@@ -45,7 +44,7 @@ namespace ClientCredentialGrant
         {
             var resourceServerUri = new Uri(Paths.ResourceServerBaseAddress);
             var client = new HttpClient(_webServerClient.CreateAuthorizingHandler(_accessToken));
-            string body = client.GetStringAsync(new Uri(resourceServerUri, Paths.MePath)).Result;
+            string body = client.GetStringAsync(new Uri(resourceServerUri, Paths.IdentityPath)).Result;
             Console.WriteLine(body);
         }
     }
