@@ -312,7 +312,7 @@ namespace AuthorizationServer.Controllers
         }
 
         // POST api/AccountApi/Register
-        [AllowAnonymous]
+        [Authorize(Roles = "ADMIN")]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {

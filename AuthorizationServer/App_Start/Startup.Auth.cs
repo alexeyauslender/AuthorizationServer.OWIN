@@ -18,6 +18,8 @@ namespace AuthorizationServer
 {
     public partial class Startup
     {
+
+        public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context and user manager to use a single instance per request
@@ -47,8 +49,8 @@ namespace AuthorizationServer
             // Enable google authentication
             app.UseGoogleAuthentication();
 
-            // Setup Authorization Server
-            app.UseOAuthAuthorizationServer(new OAuthAuthorizationServerOptions
+
+            OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 AuthorizeEndpointPath = new PathString(Paths.AuthorizePath),
                 TokenEndpointPath = new PathString(Paths.TokenPath),
@@ -72,7 +74,13 @@ namespace AuthorizationServer
                     OnCreate = CreateRefreshToken,
                     OnReceive = ReceiveRefreshToken,
                 }
-            });
+            };
+
+            // Setup Authorization Server
+            app.UseOAuthAuthorizationServer(OAuthOptions);
+
+
+            app.UseOAuthBearerTokens(OAuthOptions);
         }
 
        

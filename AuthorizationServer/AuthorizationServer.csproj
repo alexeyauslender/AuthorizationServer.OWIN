@@ -149,7 +149,9 @@
       <DependentUpon>AuthenticationModelContext-20140929102004.mdf</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\web.config" />
     <Content Include="Views\Account\External.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
