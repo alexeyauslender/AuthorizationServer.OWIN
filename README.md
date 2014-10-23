@@ -20,7 +20,7 @@ This project includes Authorization Server implementation using Microsoft Katana
 Initial setup
 =============
 Prerequisites:
-Visual Studio 2012,Microsoft.Net 4.5,Microsoft SQL Server 2012,IIS express (comes with VS installation).
+Visual Studio 2012,Microsoft.Net 4.5,Microsoft® SQL Server® 2012 Express,IIS express (comes with VS installation).
 
 Download the zip file from https://github.com/aus1977/Alexus.AuthorizationServer.OWIN/archive/Integration.zip.
 Open AuthorizationServer.sln using Visual Studio 2012.Open Package Manager Console,"Restore" button will appear on right top corner.Restore missing packages by pressing Restore.Compile the project.Open solution properties 
