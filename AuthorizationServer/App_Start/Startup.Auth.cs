@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Security.Principal;
-using System.Threading.Tasks;
 using Authorization.Models;
 using AuthorizationServer.Models;
 using AuthorizationServer.Providers;
@@ -12,22 +8,22 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Infrastructure;
 using Microsoft.Owin.Security.OAuth;
+using Microsoft.Owin.Security.OpenIdConnect;
 using Owin;
 
 namespace AuthorizationServer
 {
     public partial class Startup
     {
-
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
+
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
-
-            // Enable Application Sign In Cookie
+            //enable application sign in cookie
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = "Application",
@@ -37,7 +33,8 @@ namespace AuthorizationServer
             });
 
             // Enable External Sign In Cookie
-            app.SetDefaultSignInAsAuthenticationType("External");
+            app.SetDefaultSignInAsAuthenticationType("Application");
+            
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = "External",
@@ -46,8 +43,21 @@ namespace AuthorizationServer
                 ExpireTimeSpan = TimeSpan.FromMinutes(5),
             });
 
+            
             // Enable google authentication
             app.UseGoogleAuthentication();
+            
+            
+            // Enable openid connect authentication with thinktecture local identity server
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
+            {
+                ClientId = "implicitclient",
+                Authority = "https://localhost/Host/core",
+                RedirectUri = "http://localhost:11625",
+                ResponseType = "id_token",
+                Scope = "openid email",
+                SignInAsAuthenticationType = "External"
+            });
 
 
             OAuthOptions = new OAuthAuthorizationServerOptions
@@ -83,7 +93,6 @@ namespace AuthorizationServer
             app.UseOAuthBearerTokens(OAuthOptions);
         }
 
-       
 
         private void CreateAuthenticationCode(AuthenticationTokenCreateContext context)
         {

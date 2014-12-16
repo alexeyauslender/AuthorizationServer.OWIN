@@ -10,6 +10,8 @@ namespace AuthorizationServer
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+    (s, cert, chain, sslPolicyErrors) => true;
         }
     }
 }

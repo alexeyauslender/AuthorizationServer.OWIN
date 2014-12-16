@@ -47,5 +47,11 @@ namespace AuthorizationServer.Controllers
 
             return View();
         }
+
+        public ActionResult Signout()
+        {
+            Request.GetOwinContext().Authentication.SignOut();
+            return Redirect("/");
+        }
     }
 }
